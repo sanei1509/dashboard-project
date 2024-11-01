@@ -3,6 +3,7 @@ import styles from '@/app/ui/dashboard/sidenav.module.css';
 import AcmeLogo from '../acme-logo';
 import NavLinks from './nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
+import { signOut } from '@/auth';
 
 export default function SideNav() {
   return (
@@ -15,7 +16,12 @@ export default function SideNav() {
       <div className={styles.navContent}>
         <NavLinks />
         <div className={styles.placeholder}></div>
-        <form>
+        <form
+          action={async () => {
+            'use server';
+            await signOut();
+          }}
+        >
           <button className={styles.signOutButton}>
             <PowerIcon className={styles.powerIcon} />
             <div className={styles.signOutText}>Sign Out</div>
